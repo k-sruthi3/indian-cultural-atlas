@@ -283,3 +283,74 @@ def help_view(request):
 def custom_404(request, exception):
     return render(request, 'culture/404.html', status=404)
 
+
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import render, redirect
+
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
+# -----------------------------
+# Password Change View
+# -----------------------------
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
+# ------------------------------
+# Change Password View
+# ------------------------------
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
+# ------------------------------
+# Change Password View
+# ------------------------------
+@login_required
+def change_password_view(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Keep the user logged in for the current session
+            update_session_auth_hash(request, user)
+            # Set a session flag to allow success page
+            request.session['password_changed'] = True
+            return redirect('password_change_done')
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return render(request, 'culture/change_password.html', {'form': form})
+
+
+# ------------------------------
+# Password Change Done View
+# ------------------------------
+@login_required
+def password_change_done_view(request):
+    if request.session.get('password_changed'):
+        # Remove the session flag so success page can’t be re-used
+        del request.session['password_changed']
+        return render(request, 'culture/change_password_done.html')
+    else:
+        # User tried to access success page directly or hit back → log out
+        logout(request)
+        return redirect('login')

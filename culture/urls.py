@@ -33,22 +33,11 @@ urlpatterns = [
     # =============================
     # Password Change
     # =============================
-    path(
-        'change-password/',
-        auth_views.PasswordChangeView.as_view(
-            template_name='culture/change_password.html',
-            success_url=reverse_lazy('culture:password_change_done')
-        ),
-        name='change_password'
-    ),
 
-    path(
-        'change-password/done/',
-        auth_views.PasswordChangeDoneView.as_view(
-            template_name='culture/change_password_done.html'
-        ),
-        name='password_change_done'
-    ),
+    
+
+    path('password_change/', views.change_password_view, name='change_password'),
+    path('password_change/done/', views.password_change_done_view, name='password_change_done'),
 
     # =============================
     # State & District
