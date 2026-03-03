@@ -1,0 +1,45 @@
+<!-- culture/templates/culture/login.html -->
+{% extends 'base_auth.html' %}
+{% if user.is_authenticated %}
+    <script>
+        window.location.href = "{% url 'home' %}";
+    </script>
+{% endif %}
+{% block title %}Login - Indian Cultural Atlas{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h2>Indian Cultural Atlas</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+   <form method="POST">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <input type="text" name="username" 
+               placeholder="Username"
+               class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <input type="password" name="password" 
+               placeholder="Password"
+               class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-auth">
+        Login
+    </button>
+</form>
+    <div class="text-center mt-3">
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+    </div>
+</div>
+{% endblock %}

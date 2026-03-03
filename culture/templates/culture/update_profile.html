@@ -1,0 +1,61 @@
+<!-- culture/templates/update_profile.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg p-4">
+            <h3 class="mb-4 text-center">Update Profile</h3>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Current Profile Picture -->
+                <div class="text-center mb-4">
+                    {% if user.profile.profile_picture %}
+                        <img src="{{ user.profile.profile_picture.url }}"
+                             class="circle-img"
+                             width="150" height="150">
+                    {% else %}
+                        <img src="{% static 'images/default.png' %}"
+                             class="circle-img"
+                             width="150" height="150">
+                    {% endif %}
+                </div>
+
+                <!-- Upload New Picture -->
+                <div class="mb-3">
+                    <label class="form-label">Change Profile Picture</label>
+                    {{ form.profile_picture }}
+                </div>
+
+                <!-- Remove Checkbox -->
+                <div class="form-check mb-3">
+                    {{ form.remove_picture }}
+                    <label class="form-check-label">
+                        Remove profile picture
+                    </label>
+                </div>
+
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email"
+                           name="email"
+                           value="{{ user.email }}"
+                           class="form-control">
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        Save Changes
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

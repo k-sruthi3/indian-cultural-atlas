@@ -1,0 +1,9 @@
+<!-- culture/templates/account_info.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Account Information</h2>
+
+<p>Account Type: Standard User</p>
+<p>Last Login: {{ user.last_login }}</p>
+<p>Status: Active</p>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!-- culture/templates/help.html -->
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 col-lg-7">
+        <div class="card shadow-sm border-0 p-4">
+
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <h3 class="fw-bold">Help & Support</h3>
+                <p class="text-muted">
+                    If you have any issues with your account or searching states,
+                    please review the guides below or contact support.
+                </p>
+            </div>
+
+            <hr>
+
+            <!-- Help Topics -->
+            <div class="list-group list-group-flush">
+
+                <div class="list-group-item py-3">
+                    <h6 class="fw-bold mb-1">🔎 How to Search States</h6>
+                    <small class="text-muted">
+                        Use the search bar on the homepage to quickly find any state.
+                        Type the name and click search.
+                    </small>
+                </div>
+
+                <div class="list-group-item py-3">
+                    <h6 class="fw-bold mb-1">📍 How to View Districts</h6>
+                    <small class="text-muted">
+                        After selecting a state, scroll down to view all districts
+                        and explore their details.
+                    </small>
+                </div>
+
+                <div class="list-group-item py-3">
+                    <h6 class="fw-bold mb-1">✏️ How to Update Profile</h6>
+                    <small class="text-muted">
+                        Go to Account Settings → Update Profile to edit your
+                        personal information and profile picture.
+                    </small>
+                </div>
+
+            </div>
+
+            <!-- Contact Section -->
+            <div class="mt-4 p-3 bg-light rounded">
+                <strong>Still need help?</strong>
+                <p class="small text-muted mb-2">
+                    Contact our support team for further assistance.
+                </p>
+
+                <a href="{% url 'contact_support' %}" class="btn btn-primary btn-sm">
+    Contact Support
+</a>
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-center mt-4">
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary px-4">
+                    ← Back to Home Page
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

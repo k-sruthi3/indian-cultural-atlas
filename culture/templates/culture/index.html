@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home | Indian Cultural Atlas
+{% endblock %}
+
+{% block hero %}
+<div class="hero-section text-center py-5 bg-light">
+    <h1 class="display-4 fw-bold">Explore Incredible India 🇮🇳</h1>
+    <p class="lead">Discover Culture, Heritage & Traditions</p>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">Featured States</h2>
+
+<div class="row">
+
+    {% for state in states %}
+    <div class="col-md-4 mb-4">
+        <div class="card state-card shadow h-100">
+
+            <img src="{{ state.image }}" 
+                 class="card-img-top" 
+                 alt="{{ state.name }}">
+
+            <div class="card-body">
+                <h5 class="card-title fw-bold">
+                    {{ state.name }}
+                </h5>
+
+                <p><strong>Capital:</strong> {{ state.capital }}</p>
+
+                <p>
+                    {{ state.famous_for|truncatewords:15 }}
+                </p>
+
+                <a href="{% url 'state_detail' state.id %}" 
+                   class="btn btn-primary btn-sm">
+                    Explore More
+                </a>
+
+                <a href="{{ state.google_maps_link }}" 
+                   target="_blank"
+                   class="btn btn-success btn-sm">
+                    View Map
+                </a>
+
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p class="text-center">No states available.</p>
+    {% endfor %}
+
+</div>
+
+<!-- Pagination -->
+<div class="d-flex justify-content-center mt-4">
+
+    {% if states.has_previous %}
+        <a href="?page=1" 
+           class="btn btn-outline-dark btn-sm me-2">
+           First
+        </a>
+
+        <a href="?page={{ states.previous_page_number }}" 
+           class="btn btn-outline-dark btn-sm me-2">
+           Previous
+        </a>
+    {% endif %}
+
+    <span class="btn btn-dark btn-sm disabled">
+        Page {{ states.number }} 
+        of {{ states.paginator.num_pages }}
+    </span>
+
+    {% if states.has_next %}
+        <a href="?page={{ states.next_page_number }}" 
+           class="btn btn-outline-dark btn-sm ms-2">
+           Next
+        </a>
+
+        <a href="?page={{ states.paginator.num_pages }}" 
+           class="btn btn-outline-dark btn-sm ms-2">
+           Last
+        </a>
+    {% endif %}
+
+</div>
+
+{% endblock %}

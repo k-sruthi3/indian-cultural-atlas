@@ -1,0 +1,231 @@
+<!-- culture/templates/state_detail.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ state.name }} | Indian Cultural Atlas{% endblock %}
+
+{% block content %}
+
+<!-- FULL WIDTH TOP IMAGE HERO -->
+<div class="top-hero-container mb-5">
+    {% if state.image %}
+        <img src="{{ state.image }}" class="top-hero-img shadow">
+        <div class="top-hero-overlay"></div>
+        <h1 class="top-hero-title">{{ state.name }}</h1>
+        <h4 class="top-hero-subtitle">Capital: {{ state.capital }}</h4>
+    {% endif %}
+</div>
+
+<!-- DETAILS CARD WITH FULL FEEL -->
+<div class="full-card shadow p-5 mb-5">
+
+    <h2 class="fw-bold display-4 text-center mb-4">{{ state.name }}</h2>
+
+    <hr>
+
+    <!-- CULTURAL IMAGES SECTION -->
+    <div class="row g-4 mt-4 justify-content-center">
+
+        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            {% if state.food_image %}
+                <img src="{{ state.food_image }}" class="circle-img-xl mb-3 shadow-sm">
+            {% endif %}
+            <h5>{{ state.famous_food }}</h5>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            {% if state.dance_image %}
+                <img src="{{ state.dance_image }}" class="circle-img-xl mb-3 shadow-sm">
+            {% endif %}
+            <h5>{{ state.famous_dance }}</h5>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            {% if state.folk_art_image %}
+                <img src="{{ state.folk_art_image }}" class="circle-img-xl mb-3 shadow-sm">
+            {% endif %}
+            <h5>{{ state.famous_folk_art }}</h5>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            {% if state.temple_image %}
+                <img src="{{ state.temple_image }}" class="circle-img-xl mb-3 shadow-sm">
+            {% endif %}
+            <h5>{{ state.famous_temple }}</h5>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            {% if state.dress_image %}
+                <img src="{{ state.dress_image }}" class="circle-img-xl mb-3 shadow-sm">
+            {% endif %}
+            <h5>{{ state.traditional_dress }}</h5>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            {% if state.monument_image %}
+                <img src="{{ state.monument_image }}" class="circle-img-xl mb-3 shadow-sm">
+            {% endif %}
+            <h5>{{ state.monuments }}</h5>
+        </div>
+
+    </div>
+
+    <hr>
+<hr>
+<h3 class="mt-5 mb-4 text-center">🏙️ Districts</h3>
+
+<div class="row">
+    {% for district in districts %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+
+            {% if district.image %}
+            <img src="{{ district.image }}" class="card-img-top" 
+                 style="height:200px; object-fit:cover;">
+            {% endif %}
+
+            <div class="card-body text-center">
+                <h5 class="fw-bold">{{ district.name }}</h5>
+
+                <a href="{% url 'district_detail' district.id %}" 
+                   class="btn btn-primary btn-sm mt-2">
+                   Explore District
+                </a>
+
+                <a href="{{ district.google_maps_link }}" 
+                   target="_blank"
+                   class="btn btn-success btn-sm mt-2">
+                   View Map
+                </a>
+            </div>
+
+        </div>
+    </div>
+    {% empty %}
+        <p class="text-muted">No districts added for this state yet.</p>
+    {% endfor %}
+</div>
+    <!-- GOOGLE MAP -->
+    <h5 class="mt-4">📍 Location</h5>
+    <iframe
+        src="{{ state.google_maps_embed }}"
+        width="100%"
+        height="400"
+        style="border:0; border-radius:12px;"
+        loading="lazy">
+    </iframe>
+
+    <div class="mt-4 text-center">
+        <a href="{{ state.google_maps_link }}" 
+           target="_blank" 
+           class="btn btn-success btn-lg">
+           🗺️ View on Google Maps
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* FULL PAGE BACKGROUND ILLUSION */
+body {
+    background: linear-gradient(135deg, #f2f4f8 0%, #e6e9f0 50%, #f2f4f8 100%);
+    background-attachment: fixed;
+}
+
+/* FULL WIDTH TOP HERO IMAGE */
+.top-hero-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+.top-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+}
+
+.top-hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+}
+
+.top-hero-title {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.top-hero-subtitle {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+/* FULL DETAILS CARD */
+.full-card {
+    border-radius: 20px;
+    padding: 4rem !important;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* EXTRA LARGE CIRCULAR IMAGES */
+.circle-img-xl {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #ddd;
+    transition: 0.3s;
+}
+.circle-img-xl:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+/* MAP BUTTON */
+.btn-success {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+}
+
+/* RESPONSIVE HERO TEXT */
+@media (max-width: 768px) {
+    .top-hero-title {
+        font-size: 2rem;
+    }
+    .top-hero-subtitle {
+        font-size: 1.2rem;
+    }
+}
+/* EXTRA LARGE CIRCULAR IMAGES */
+.circle-img-xl {
+    width: 300px;   /* increase width */
+    height: 300px;  /* increase height */
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #ddd;
+    transition: 0.3s;
+}
+.circle-img-xl:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+</style>
+{% endblock %}
