@@ -1,5 +1,5 @@
 <!-- culture/templates/culture/login.html -->
-{% extends 'base_auth.html' %}
+{% extends 'culture/base_auth.html' %}
 {% if user.is_authenticated %}
     <script>
         window.location.href = "{% url 'home' %}";

@@ -1,3 +1,4 @@
+<!-- cultre/templates/culture/index.html -->
 {% extends 'base.html' %}
 
 {% block title %}
@@ -56,38 +57,5 @@ Home | Indian Cultural Atlas
 
 </div>
 
-<!-- Pagination -->
-<div class="d-flex justify-content-center mt-4">
-
-    {% if states.has_previous %}
-        <a href="?page=1" 
-           class="btn btn-outline-dark btn-sm me-2">
-           First
-        </a>
-
-        <a href="?page={{ states.previous_page_number }}" 
-           class="btn btn-outline-dark btn-sm me-2">
-           Previous
-        </a>
-    {% endif %}
-
-    <span class="btn btn-dark btn-sm disabled">
-        Page {{ states.number }} 
-        of {{ states.paginator.num_pages }}
-    </span>
-
-    {% if states.has_next %}
-        <a href="?page={{ states.next_page_number }}" 
-           class="btn btn-outline-dark btn-sm ms-2">
-           Next
-        </a>
-
-        <a href="?page={{ states.paginator.num_pages }}" 
-           class="btn btn-outline-dark btn-sm ms-2">
-           Last
-        </a>
-    {% endif %}
-
-</div>
 
 {% endblock %}

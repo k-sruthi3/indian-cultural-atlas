@@ -7,6 +7,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
+from django.shortcuts import render
+from .models import State
+from django.db.models import Q
 
 from .models import State, Festival, DanceForm, District, Profile
 from .forms import ProfileUpdateForm, ContactForm
@@ -26,15 +29,30 @@ def root_redirect(request):
 # CUSTOM LOGIN VIEW
 # =========================
 
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+from django.contrib.auth.views import LoginView
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+
+@method_decorator(never_cache, name='dispatch')
 class CustomLoginView(LoginView):
     template_name = 'culture/login.html'
+    authentication_form = AuthenticationForm
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
+    def form_valid(self, form):
+        messages.success(self.request, f"Welcome {form.get_user().username}!")
+        return super().form_valid(form)
 
+    def form_invalid(self, form):
+        messages.error(self.request, "Invalid username or password!")
+        return super().form_invalid(form)
 # =========================
 # LOGOUT
 # =========================
@@ -53,10 +71,11 @@ def logout_view(request):
 
 @never_cache
 @login_required
-def home(request):
-    states = State.objects.all().order_by('name')
-    return render(request, 'culture/index.html', {'states': states})
 
+
+def home(request):
+    states = State.objects.all()[:6]  # Only show first 6 states
+    return render(request, 'culture/index.html', {'states': states})
 
 # =========================
 # PROFILE
@@ -119,6 +138,7 @@ def delete_account(request):
 # =========================
 # REGISTER
 # =========================
+@never_cache
 
 def register_view(request):
     if request.method == "POST":
@@ -177,25 +197,56 @@ def district_detail(request, district_id):
 # SEARCH
 # =========================
 
+
+
 @never_cache
 @login_required
 def search_view(request):
     query = request.GET.get("q", "").strip()
-
+    
     if not query:
         return render(request, "culture/not_found.html", {"query": query})
 
-    state = State.objects.filter(name__icontains=query).first()
+    # Search States
+    state = State.objects.filter(
+        Q(name__icontains=query) |
+        Q(famous_food__icontains=query) |
+        Q(famous_dance__icontains=query) |
+        Q(famous_folk_art__icontains=query) |
+        Q(famous_temple__icontains=query) |
+        Q(traditional_dress__icontains=query) |
+        Q(monuments__icontains=query)
+    ).first()
     if state:
         return redirect("state_detail", state_id=state.id)
 
-    district = District.objects.filter(name__icontains=query).first()
+    # Search Districts
+    district = District.objects.filter(
+        Q(name__icontains=query) |
+        Q(famous_food__icontains=query) |
+        Q(famous_festival__icontains=query) |
+        Q(famous_temple__icontains=query) |
+        Q(famous_monument__icontains=query)
+    ).first()
     if district:
         return redirect("district_detail", district_id=district.id)
 
+    # Search Festivals
+    festival = Festival.objects.filter(
+        Q(name__icontains=query) | Q(description__icontains=query)
+    ).first()
+    if festival:
+        return redirect("state_detail", state_id=festival.state.id)
+
+    # Search DanceForms
+    dance = DanceForm.objects.filter(
+        Q(name__icontains=query) | Q(description__icontains=query)
+    ).first()
+    if dance:
+        return redirect("state_detail", state_id=dance.state.id)
+
+    # If nothing found
     return render(request, "culture/not_found.html", {"query": query})
-
-
 # =========================
 # CONTACT
 # =========================
@@ -231,3 +282,4 @@ def help_view(request):
 
 def custom_404(request, exception):
     return render(request, 'culture/404.html', status=404)
+

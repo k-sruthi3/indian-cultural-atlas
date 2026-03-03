@@ -36,14 +36,17 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 
+
+    'indian_cultural_atlas.middleware.HideAdminMiddleware', 
     # 👇 This prevents back button after logout
-    'indian_cultural_atlas.middleware.DisableCacheMiddleware',
 
     # 👇 This hides admin if you created it
-    'indian_cultural_atlas.middleware.HideAdminMiddleware',
 
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'indian_cultural_atlas.middleware.DisableCacheMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'indian_cultural_atlas.urls'
