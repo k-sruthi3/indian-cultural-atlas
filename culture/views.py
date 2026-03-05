@@ -81,10 +81,16 @@ def home(request):
 # PROFILE
 # =========================
 
+
+
 @never_cache
 @login_required
 def profile_view(request):
-    return render(request, 'culture/profile.html')
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    return render(request, 'culture/profile.html', {
+        'profile': profile
+    })
 
 
 @never_cache
@@ -251,6 +257,8 @@ def search_view(request):
 # CONTACT
 # =========================
 
+@never_cache
+@login_required
 def contact_support(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -272,9 +280,10 @@ def contact_support(request):
 # HELP
 # =========================
 
+@never_cache
+@login_required
 def help_view(request):
     return render(request, 'culture/help.html')
-
 
 # =========================
 # CUSTOM 404
