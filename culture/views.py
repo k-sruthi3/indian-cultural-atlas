@@ -60,10 +60,8 @@ class CustomLoginView(LoginView):
 @never_cache
 def logout_view(request):
     logout(request)
-    response = redirect('login')
-    response.delete_cookie('sessionid')
-    return response
-
+    request.session.flush()   # completely destroy session
+    return redirect('login')
 
 # =========================
 # HOME

@@ -33,22 +33,14 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'indian_cultural_atlas.middleware.DisableCacheMiddleware',
-
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 
-
-    # 👇 This prevents back button after logout
-
-    # 👇 This hides admin if you created it
-
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     'indian_cultural_atlas.middleware.DisableCacheMiddleware',
-        'indian_cultural_atlas.middleware.HideAdminMiddleware',
-
-
+    'indian_cultural_atlas.middleware.HideAdminMiddleware',
 ]
 
 ROOT_URLCONF = 'indian_cultural_atlas.urls'
@@ -141,3 +133,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'your_email@gmail.com'
 EMAIL_HOST_PASSWORD = 'your_app_password'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

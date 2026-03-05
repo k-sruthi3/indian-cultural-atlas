@@ -47,14 +47,34 @@ class HideAdminMiddleware:
 # ==========================================
 # Disable Browser Cache (Fix Back Button)
 # ==========================================
+# ==========================================
+# Disable Browser Cache (Fix Back Button)
+# ==========================================
+
+from django.shortcuts import redirect
+from django.urls import reverse
+
 class DisableCacheMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
+
+        # If user is not logged in and tries to access protected pages
+        if not request.user.is_authenticated:
+            protected_paths = [
+                '/home/',
+                '/profile/',
+                '/settings/',
+                '/update_profile/',
+            ]
+
+            if request.path in protected_paths:
+                return redirect(reverse('login'))
+
         response = self.get_response(request)
 
-        # 🔥 Disable cache for ALL pages
+        # Disable browser caching
         response["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
         response["Pragma"] = "no-cache"
         response["Expires"] = "0"

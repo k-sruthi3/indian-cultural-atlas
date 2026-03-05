@@ -1,43 +1,93 @@
 <!-- culture/templates/district_detail.html -->
+
 {% extends "base.html" %}
 
 {% block title %}{{ district.name }} | Indian Cultural Atlas{% endblock %}
 
 {% block content %}
 
-<div class="mb-4">
+<div class="container mt-4">
+
+<!-- District Image -->
+
+<div class="hero-container mb-4">
+
     {% if district.image %}
-        <img src="{{ district.image }}" class="img-fluid rounded shadow"
-             style="width:100%; height:350px; object-fit:cover;">
+        <img src="{{ district.image }}" class="hero-img">
     {% endif %}
+
 </div>
 
-<div class="card shadow p-5">
 
-    <h1 class="fw-bold mb-3">{{ district.name }}</h1>
-    <h5 class="text-muted">State: {{ district.state.name }}</h5>
+<!-- District Title -->
 
-    <hr>
+<div class="text-center mb-4">
+    <h1 class="fw-bold">{{ district.name }}</h1>
+    <h5 class="text-muted">{{ district.state.name }}</h5>
+</div>
 
-    <p><strong>🍛 Famous Food:</strong><br> {{ district.famous_food }}</p>
 
-    <p><strong>🎉 Famous Festival:</strong><br> {{ district.famous_festival }}</p>
+<div class="row g-4">
 
-    <p><strong>🛕 Famous Temple:</strong><br> {{ district.famous_temple }}</p>
+<!-- Famous Food -->
 
-    <p><strong>🏰 Famous Monument:</strong><br> {{ district.famous_monument }}</p>
+<div class="col-md-6">
+<div class="card shadow h-100 p-4">
+<h4 class="fw-bold text-primary"> Famous Food</h4>
+<p>{{ district.famous_food }}</p>
+</div>
+</div>
 
-    <p><strong>✨ What Makes It Unique:</strong><br> {{ district.uniqueness }}</p>
 
-    <hr>
+<!-- Famous Festival -->
 
-    <h5>📍 Location</h5>
+<div class="col-md-6">
+<div class="card shadow h-100 p-4">
+<h4 class="fw-bold text-danger"> Famous Festival</h4>
+<p>{{ district.famous_festival }}</p>
+</div>
+</div>
+
+
+<!-- Famous Temple -->
+
+<div class="col-md-6">
+<div class="card shadow h-100 p-4">
+<h4 class="fw-bold text-warning">Famous Temple</h4>
+<p>{{ district.famous_temple }}</p>
+</div>
+</div>
+
+
+<!-- Famous Monument -->
+
+<div class="col-md-6">
+<div class="card shadow h-100 p-4">
+<h4 class="fw-bold text-success"> Famous Monument</h4>
+<p>{{ district.famous_monument }}</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- Uniqueness Section -->
+
+<div class="card shadow p-4 mt-4">
+<h4 class="fw-bold text-dark"> What Makes It Unique</h4>
+<p>{{ district.uniqueness }}</p>
+</div>
+
+
+<!-- Map Button -->
+
+
+
+<div class="text-center mt-4">
     <a href="{{ district.google_maps_link }}" 
        target="_blank" 
-       class="btn btn-success">
-       🗺️ View on Google Maps
+       class="btn btn-atlas-map btn-lg">
+        View on Google Maps
     </a>
-
 </div>
-
 {% endblock %}
