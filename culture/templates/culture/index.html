@@ -1,4 +1,5 @@
-<!-- cultre/templates/culture/index.html -->
+<!-- culture/templates/culture/index.html -->
+
 {% extends 'base.html' %}
 
 {% block title %}
@@ -6,56 +7,82 @@ Home | Indian Cultural Atlas
 {% endblock %}
 
 {% block hero %}
-<div class="hero-section text-center py-5 bg-light">
-    <h1 class="display-4 fw-bold">Explore Incredible India 🇮🇳</h1>
-    <p class="lead">Discover Culture, Heritage & Traditions</p>
+
+<div class="hero-section">
+
+<h1 class="display-4 fw-bold">
+Explore Incredible India 🇮🇳
+</h1>
+
+<p class="lead">
+Discover Culture, Heritage & Traditions
+</p>
+
 </div>
+
 {% endblock %}
 
 {% block content %}
 
-<h2 class="text-center mb-4">Featured States</h2>
+<h2 class="text-center mb-5">
+Featured States
+</h2>
 
 <div class="row">
 
-    {% for state in states %}
-    <div class="col-md-4 mb-4">
-        <div class="card state-card shadow h-100">
+{% for state in states %}
 
-            <img src="{{ state.image }}" 
-                 class="card-img-top" 
-                 alt="{{ state.name }}">
+<div class="col-md-4 mb-4">
 
-            <div class="card-body">
-                <h5 class="card-title fw-bold">
-                    {{ state.name }}
-                </h5>
+<div class="card shadow h-100">
 
-                <p><strong>Capital:</strong> {{ state.capital }}</p>
+<img src="{{ state.image }}"
+class="card-img-top"
+alt="{{ state.name }}">
 
-                <p>
-                    {{ state.famous_for|truncatewords:15 }}
-                </p>
+<div class="card-body">
 
-                <a href="{% url 'state_detail' state.id %}" 
-                   class="btn btn-primary btn-sm">
-                    Explore More
-                </a>
+<h5 class="card-title fw-bold">
+{{ state.name }}
+</h5>
 
-                <a href="{{ state.google_maps_link }}" 
-                   target="_blank"
-                   class="btn btn-success btn-sm">
-                    View Map
-                </a>
+<p>
+<strong>Capital:</strong> {{ state.capital }}
+</p>
 
-            </div>
-        </div>
-    </div>
-    {% empty %}
-        <p class="text-center">No states available.</p>
-    {% endfor %}
+<p>
+{{ state.famous_for|truncatewords:15 }}
+</p>
+
+<a href="{% url 'state_detail' state.id %}"
+class="btn btn-atlas-primary btn-sm me-2">
+
+Explore More
+
+</a>
+
+<a href="{{ state.google_maps_link }}"
+target="_blank"
+class="btn btn-atlas-map btn-sm">
+
+View Map
+
+</a>
 
 </div>
 
+</div>
+
+</div>
+
+{% empty %}
+
+<p class="text-center">
+No states available.
+</p>
+
+{% endfor %}
+
+</div>
 
 {% endblock %}
