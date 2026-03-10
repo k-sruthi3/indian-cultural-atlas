@@ -60,4 +60,7 @@ urlpatterns = [
     path('search/', views.search_view, name='search'),
     path('help/', views.help_view, name='help'),
     path('contact/', views.contact_support, name='contact_support'),
+
+
+    
 ]

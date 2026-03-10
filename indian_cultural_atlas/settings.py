@@ -2,6 +2,9 @@
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,7 +55,7 @@ ROOT_URLCONF = 'indian_cultural_atlas.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],   # ✅ IMPORTANT
+        'DIRS': [BASE_DIR / "templates"],   # ✅ IMPORTANT
         'APP_DIRS': True,
 
         'OPTIONS': {
@@ -126,12 +129,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email (optional)
 # ======================
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your_email@gmail.com'
-EMAIL_HOST_PASSWORD = 'your_app_password'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
+DEFAULT_FROM_EMAIL ="vishnu womens college <ksruthi135@gmail.com>"
+
