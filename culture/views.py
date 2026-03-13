@@ -260,20 +260,40 @@ def search_view(request):
 def contact_support(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
+
         if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            # Format the email content
+            full_message = f"""
+New Support Message from Indian Cultural Atlas
+
+Name: {name}
+Email: {email}
+
+Subject:
+{subject}
+
+Message:
+{message}
+"""
+
             send_mail(
-                form.cleaned_data['subject'],
-                form.cleaned_data['message'],
-                settings.DEFAULT_FROM_EMAIL,
-                ['your_email@gmail.com'],
+                subject=f"Support Request: {subject}",
+                message=full_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.SUPPORT_EMAIL],  # sends to your configured email
             )
+
             return render(request, 'culture/contact_success.html')
+
     else:
         form = ContactForm()
 
     return render(request, 'culture/contact.html', {'form': form})
-
-
 # =========================
 # HELP
 # =========================

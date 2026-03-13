@@ -1,6 +1,25 @@
+
+
+
+pending.txt
+
+# Python
 __pycache__/
 *.pyc
+
+# Django
 db.sqlite3
 media/
+
+# Environment variables
 .env
-pending.txt
+
+# VS Code
+.vscode/
+
+# Static files collected
+staticfiles/
+
+# Virtual environment
+venv/
+env/
