@@ -2,43 +2,62 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-7">
-        <div class="card shadow-sm border-0 p-4">
-            <h3 class="fw-bold mb-4 text-center">Contact Support</h3>
+<div class="container mt-5">
 
-            <form method="POST">
-                {% csrf_token %}
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Contact Support</h2>
+        <p class="text-muted">
+            Have questions about Indian Cultural Atlas? Send us a message and we'll help you.
+        </p>
+    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Full Name</label>
-                    {{ form.name }}
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-md-7">
 
-                <div class="mb-3">
-                    <label class="form-label">Email Address</label>
-                    {{ form.email }}
-                </div>
+            <div class="card shadow-lg border-0 rounded-4 p-4">
 
-                <div class="mb-3">
-                    <label class="form-label">Subject</label>
-                    {{ form.subject }}
-                </div>
+                <form method="POST">
+                    {% csrf_token %}
 
-                <div class="mb-3">
-                    <label class="form-label">Message</label>
-                    {{ form.message }}
-                </div>
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Full Name</label>
+                        {{ form.name }}
+                    </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary px-4">
-                        Send Message
-                    </button>
-                </div>
-            </form>
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Email Address</label>
+                        {{ form.email }}
+                    </div>
+
+                    <!-- Subject -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Subject</label>
+                        {{ form.subject }}
+                    </div>
+
+                    <!-- Message -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Message</label>
+                        {{ form.message }}
+                    </div>
+
+                    <!-- Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-3">
+                            Send Message
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
 
         </div>
     </div>
+
 </div>
 
 {% endblock %}
