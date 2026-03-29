@@ -17,26 +17,37 @@ class State(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
 
+    # FOOD
     famous_food = models.TextField(blank=True)
     food_image = models.URLField(blank=True)
+    food_link = models.URLField(blank=True)   # 👈 ADD
 
+    # DANCE
     famous_dance = models.TextField(blank=True)
     dance_image = models.URLField(blank=True)
+    dance_link = models.URLField(blank=True)  # 👈 ADD
 
+    # FOLK ART
     famous_folk_art = models.TextField(blank=True)
     folk_art_image = models.URLField(blank=True)
+    folk_art_link = models.URLField(blank=True)  # 👈 ADD
 
+    # TEMPLE
     famous_temple = models.TextField(blank=True)
     temple_image = models.URLField(blank=True)
+    temple_link = models.URLField(blank=True)  # 👈 ADD
 
+    # DRESS
     traditional_dress = models.TextField(blank=True)
     dress_image = models.URLField(blank=True)
+    dress_link = models.URLField(blank=True)  # 👈 ADD
 
+    # MONUMENT
     monuments = models.TextField(blank=True)
     monument_image = models.URLField(blank=True)
+    monument_link = models.URLField(blank=True)  # 👈 ADD
 
     uniqueness = models.TextField(blank=True)
-
     image = models.URLField(blank=True)
 
     def __str__(self):
@@ -90,14 +101,22 @@ class DanceForm(models.Model):
 class District(models.Model):
     name = models.CharField(max_length=100)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
-    latitude = models.FloatField(null=True, blank=True)
-    longitude = models.FloatField(null=True, blank=True)
+
     famous_food = models.TextField(blank=True)
+    food_link = models.URLField(blank=True)   # 👈 ADD
+
     famous_festival = models.TextField(blank=True)
+    festival_link = models.URLField(blank=True)  # 👈 ADD
+
     famous_temple = models.TextField(blank=True)
+    temple_link = models.URLField(blank=True)  # 👈 ADD
+
     famous_monument = models.TextField(blank=True)
+    monument_link = models.URLField(blank=True)  # 👈 ADD
+
     uniqueness = models.TextField(blank=True)
     image = models.URLField(blank=True)
+    uniqueness_link = models.URLField(blank=True)   # 👈 ADD THIS
 
     def __str__(self):
         return f"{self.name}, {self.state.name}"

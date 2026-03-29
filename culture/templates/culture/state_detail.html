@@ -26,49 +26,91 @@
     <!-- CULTURAL IMAGES SECTION -->
     <div class="row g-4 mt-4 justify-content-center">
 
-        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            {% if state.food_image %}
+    <!-- FOOD -->
+    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+        {% if state.food_image %}
+            <a href="{{ state.food_link }}" target="_blank">
                 <img src="{{ state.food_image }}" class="circle-img-xl mb-3 shadow-sm">
-            {% endif %}
-            <h5>{{ state.famous_food }}</h5>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            {% if state.dance_image %}
-                <img src="{{ state.dance_image }}" class="circle-img-xl mb-3 shadow-sm">
-            {% endif %}
-            <h5>{{ state.famous_dance }}</h5>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            {% if state.folk_art_image %}
-                <img src="{{ state.folk_art_image }}" class="circle-img-xl mb-3 shadow-sm">
-            {% endif %}
-            <h5>{{ state.famous_folk_art }}</h5>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            {% if state.temple_image %}
-                <img src="{{ state.temple_image }}" class="circle-img-xl mb-3 shadow-sm">
-            {% endif %}
-            <h5>{{ state.famous_temple }}</h5>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            {% if state.dress_image %}
-                <img src="{{ state.dress_image }}" class="circle-img-xl mb-3 shadow-sm">
-            {% endif %}
-            <h5>{{ state.traditional_dress }}</h5>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            {% if state.monument_image %}
-                <img src="{{ state.monument_image }}" class="circle-img-xl mb-3 shadow-sm">
-            {% endif %}
-            <h5>{{ state.monuments }}</h5>
-        </div>
-
+            </a>
+        {% endif %}
+        <h5>
+            <a href="{{ state.food_link }}" target="_blank">
+                {{ state.famous_food }}
+            </a>
+        </h5>
     </div>
+
+    <!-- DANCE -->
+    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+        {% if state.dance_image %}
+            <a href="{{ state.dance_link }}" target="_blank">
+                <img src="{{ state.dance_image }}" class="circle-img-xl mb-3 shadow-sm">
+            </a>
+        {% endif %}
+        <h5>
+            <a href="{{ state.dance_link }}" target="_blank">
+                {{ state.famous_dance }}
+            </a>
+        </h5>
+    </div>
+
+    <!-- FOLK ART -->
+    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+        {% if state.folk_art_image %}
+            <a href="{{ state.folk_art_link }}" target="_blank">
+                <img src="{{ state.folk_art_image }}" class="circle-img-xl mb-3 shadow-sm">
+            </a>
+        {% endif %}
+        <h5>
+            <a href="{{ state.folk_art_link }}" target="_blank">
+                {{ state.famous_folk_art }}
+            </a>
+        </h5>
+    </div>
+
+    <!-- TEMPLE -->
+    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+        {% if state.temple_image %}
+            <a href="{{ state.temple_link }}" target="_blank">
+                <img src="{{ state.temple_image }}" class="circle-img-xl mb-3 shadow-sm">
+            </a>
+        {% endif %}
+        <h5>
+            <a href="{{ state.temple_link }}" target="_blank">
+                {{ state.famous_temple }}
+            </a>
+        </h5>
+    </div>
+
+    <!-- DRESS -->
+    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+        {% if state.dress_image %}
+            <a href="{{ state.dress_link }}" target="_blank">
+                <img src="{{ state.dress_image }}" class="circle-img-xl mb-3 shadow-sm">
+            </a>
+        {% endif %}
+        <h5>
+            <a href="{{ state.dress_link }}" target="_blank">
+                {{ state.traditional_dress }}
+            </a>
+        </h5>
+    </div>
+
+    <!-- MONUMENT -->
+    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+        {% if state.monument_image %}
+            <a href="{{ state.monument_link }}" target="_blank">
+                <img src="{{ state.monument_image }}" class="circle-img-xl mb-3 shadow-sm">
+            </a>
+        {% endif %}
+        <h5>
+            <a href="{{ state.monument_link }}" target="_blank">
+                {{ state.monuments }}
+            </a>
+        </h5>
+    </div>
+
+</div>
 
     <hr>
 <hr>

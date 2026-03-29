@@ -6,76 +6,88 @@
 
 {% block content %}
 
-<div class="container mt-4">
-
-<!-- District Image -->
-
-<div class="hero-container mb-4">
-
-    {% if district.image %}
-        <img src="{{ district.image }}" class="hero-img">
-    {% endif %}
-
-</div>
-
-
-<!-- District Title -->
-
-<div class="text-center mb-4">
-    <h1 class="fw-bold">{{ district.name }}</h1>
-    <h5 class="text-muted">{{ district.state.name }}</h5>
-</div>
-
-
 <div class="row g-4">
 
-<!-- Famous Food -->
+    <!-- Famous Food -->
+    <div class="col-md-6">
+        <div class="card shadow h-100 p-4">
+            <h4 class="fw-bold text-primary">Famous Food</h4>
+            <p>
+                {% if district.food_link %}
+                    <a href="{{ district.food_link }}" target="_blank">
+                        {{ district.famous_food }}
+                    </a>
+                {% else %}
+                    {{ district.famous_food }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
 
-<div class="col-md-6">
-<div class="card shadow h-100 p-4">
-<h4 class="fw-bold text-primary"> Famous Food</h4>
-<p>{{ district.famous_food }}</p>
-</div>
-</div>
+    <!-- Famous Festival -->
+    <div class="col-md-6">
+        <div class="card shadow h-100 p-4">
+            <h4 class="fw-bold text-danger">Famous Festival</h4>
+            <p>
+                {% if district.festival_link %}
+                    <a href="{{ district.festival_link }}" target="_blank">
+                        {{ district.famous_festival }}
+                    </a>
+                {% else %}
+                    {{ district.famous_festival }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
 
+    <!-- Famous Temple -->
+    <div class="col-md-6">
+        <div class="card shadow h-100 p-4">
+            <h4 class="fw-bold text-warning">Famous Temple</h4>
+            <p>
+                {% if district.temple_link %}
+                    <a href="{{ district.temple_link }}" target="_blank">
+                        {{ district.famous_temple }}
+                    </a>
+                {% else %}
+                    {{ district.famous_temple }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
 
-<!-- Famous Festival -->
+    <!-- Famous Monument -->
+    <div class="col-md-6">
+        <div class="card shadow h-100 p-4">
+            <h4 class="fw-bold text-success">Famous Monument</h4>
+            <p>
+                {% if district.monument_link %}
+                    <a href="{{ district.monument_link }}" target="_blank">
+                        {{ district.famous_monument }}
+                    </a>
+                {% else %}
+                    {{ district.famous_monument }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
 
-<div class="col-md-6">
-<div class="card shadow h-100 p-4">
-<h4 class="fw-bold text-danger"> Famous Festival</h4>
-<p>{{ district.famous_festival }}</p>
-</div>
-</div>
+    <!-- Uniqueness -->
+    <div class="col-md-12">
+        <div class="card shadow h-100 p-4">
+            <h4 class="fw-bold text-dark">What Makes It Unique</h4>
+            <p>
+                {% if district.uniqueness_link %}
+                    <a href="{{ district.uniqueness_link }}" target="_blank">
+                        {{ district.uniqueness }}
+                    </a>
+                {% else %}
+                    {{ district.uniqueness }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
 
-
-<!-- Famous Temple -->
-
-<div class="col-md-6">
-<div class="card shadow h-100 p-4">
-<h4 class="fw-bold text-warning">Famous Temple</h4>
-<p>{{ district.famous_temple }}</p>
-</div>
-</div>
-
-
-<!-- Famous Monument -->
-
-<div class="col-md-6">
-<div class="card shadow h-100 p-4">
-<h4 class="fw-bold text-success"> Famous Monument</h4>
-<p>{{ district.famous_monument }}</p>
-</div>
-</div>
-
-</div>
-
-
-<!-- Uniqueness Section -->
-
-<div class="card shadow p-4 mt-4">
-<h4 class="fw-bold text-dark"> What Makes It Unique</h4>
-<p>{{ district.uniqueness }}</p>
 </div>
 
 
