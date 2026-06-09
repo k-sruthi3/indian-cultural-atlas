@@ -62,5 +62,8 @@ urlpatterns = [
     path('contact/', views.contact_support, name='contact_support'),
 
 
-    
+    path('submit/', views.submit_culture, name='submit_culture'),
+    path('success/', views.submit_success, name='submit_success'),
+
+    path('about/', views.about_view, name='about'),
 ]

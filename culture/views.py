@@ -1,3 +1,4 @@
+# culture/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
@@ -10,9 +11,11 @@ from django.conf import settings
 from django.shortcuts import render
 from .models import State
 from django.db.models import Q
+from django.shortcuts import render, redirect
 
 from .models import State, Festival, DanceForm, District, Profile
 from .forms import ProfileUpdateForm, ContactForm
+from .forms import SubmissionForm
 
 
 # =========================
@@ -207,50 +210,73 @@ def district_detail(request, district_id):
 @login_required
 def search_view(request):
     query = request.GET.get("q", "").strip()
-    
+
     if not query:
-        return render(request, "culture/not_found.html", {"query": query})
+        return render(
+            request,
+            "culture/not_found.html",
+            {"query": query}
+        )
 
     # Search States
     state = State.objects.filter(
-        Q(name__icontains=query) |
-        Q(famous_food__icontains=query) |
-        Q(famous_dance__icontains=query) |
-        Q(famous_folk_art__icontains=query) |
-        Q(famous_temple__icontains=query) |
-        Q(traditional_dress__icontains=query) |
-        Q(monuments__icontains=query)
+        Q(name__iexact=query) |
+        Q(famous_food__iexact=query) |
+        Q(famous_dance__iexact=query) |
+        Q(famous_folk_art__iexact=query) |
+        Q(famous_temple__iexact=query) |
+        Q(traditional_dress__iexact=query) |
+        Q(monuments__iexact=query)
     ).first()
+
     if state:
-        return redirect("state_detail", state_id=state.id)
+        return redirect(
+            "state_detail",
+            state_id=state.id
+        )
 
     # Search Districts
     district = District.objects.filter(
-        Q(name__icontains=query) |
-        Q(famous_food__icontains=query) |
-        Q(famous_festival__icontains=query) |
-        Q(famous_temple__icontains=query) |
-        Q(famous_monument__icontains=query)
+        Q(name__iexact=query) |
+        Q(famous_food__iexact=query) |
+        Q(famous_festival__iexact=query) |
+        Q(famous_temple__iexact=query) |
+        Q(famous_monument__iexact=query)
     ).first()
+
     if district:
-        return redirect("district_detail", district_id=district.id)
+        return redirect(
+            "district_detail",
+            district_id=district.id
+        )
 
     # Search Festivals
     festival = Festival.objects.filter(
-        Q(name__icontains=query) | Q(description__icontains=query)
+        Q(name__iexact=query)
     ).first()
+
     if festival:
-        return redirect("state_detail", state_id=festival.state.id)
+        return redirect(
+            "state_detail",
+            state_id=festival.state.id
+        )
 
-    # Search DanceForms
+    # Search Dance Forms
     dance = DanceForm.objects.filter(
-        Q(name__icontains=query) | Q(description__icontains=query)
+        Q(name__iexact=query)
     ).first()
-    if dance:
-        return redirect("state_detail", state_id=dance.state.id)
 
-    # If nothing found
-    return render(request, "culture/not_found.html", {"query": query})
+    if dance:
+        return redirect(
+            "state_detail",
+            state_id=dance.state.id
+        )
+
+    return render(
+        request,
+        "culture/not_found.html",
+        {"query": query}
+    )
 # =========================
 # CONTACT
 # =========================
@@ -381,3 +407,46 @@ def password_change_done_view(request):
         # User tried to access success page directly or hit back → log out
         logout(request)
         return redirect('login')
+    
+
+# =========================
+# CULTURE SUBMISSION
+# =========================
+
+@login_required
+def submit_culture(request):
+    if request.method == 'POST':
+        form = SubmissionForm(request.POST)
+
+        if form.is_valid():
+            submission = form.save(commit=False)
+            submission.status = 'pending'
+            submission.save()
+
+            messages.success(
+                request,
+                "Your submission has been sent for admin approval."
+            )
+
+            return redirect('submit_success')
+
+    else:
+        form = SubmissionForm()
+
+    return render(
+        request,
+        'culture/submit_culture.html',
+        {'form': form}
+    )
+
+
+@login_required
+def submit_success(request):
+    return render(
+        request,
+        'culture/submit_success.html'
+    )
+
+@login_required
+def about_view(request):
+    return render(request, 'culture/about.html')

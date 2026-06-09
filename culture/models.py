@@ -125,7 +125,13 @@ class District(models.Model):
     def google_maps_link(self):
         return f"https://www.google.com/maps/search/{self.name},+{self.state.name}"
 
-
+    class Meta:
+        constraints = [
+        models.UniqueConstraint(
+            fields=['name', 'state'],
+            name='unique_district_per_state'
+        )
+    ]
 # ----------------------------
 # PROFILE MODEL
 # ----------------------------
@@ -150,3 +156,91 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+
+class Submission(models.Model):
+
+    AREA_CHOICES = [
+        ('state', 'State'),
+        ('district', 'District'),
+    ]
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+
+    area_type = models.CharField(
+        max_length=20,
+        choices=AREA_CHOICES
+    )
+
+    # Basic Info
+    state_name = models.CharField(max_length=100)
+
+    district_name = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    capital = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    # State Fields
+    famous_food = models.TextField(blank=True)
+    food_image = models.URLField(blank=True)
+    food_link = models.URLField(blank=True)
+
+    famous_dance = models.TextField(blank=True)
+    dance_image = models.URLField(blank=True)
+    dance_link = models.URLField(blank=True)
+
+    famous_folk_art = models.TextField(blank=True)
+    folk_art_image = models.URLField(blank=True)
+    folk_art_link = models.URLField(blank=True)
+
+    famous_temple = models.TextField(blank=True)
+    temple_image = models.URLField(blank=True)
+    temple_link = models.URLField(blank=True)
+
+    traditional_dress = models.TextField(blank=True)
+    dress_image = models.URLField(blank=True)
+    dress_link = models.URLField(blank=True)
+
+    monuments = models.TextField(blank=True)
+    monument_image = models.URLField(blank=True)
+    monument_link = models.URLField(blank=True)
+
+    # District Fields
+    famous_festival = models.TextField(blank=True)
+    festival_link = models.URLField(blank=True)
+
+    uniqueness = models.TextField(blank=True)
+    uniqueness_link = models.URLField(blank=True)
+
+    image = models.URLField(blank=True)
+
+    # Contributor
+    submitted_by = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.state_name} - {self.area_type}"
