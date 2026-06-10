@@ -17,7 +17,9 @@ from .models import State, Festival, DanceForm, District, Profile
 from .forms import ProfileUpdateForm, ContactForm
 from .forms import SubmissionForm
 
-
+from .forms import StateSubmissionForm, DistrictSubmissionForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 # =========================
 # ROOT REDIRECT
 # =========================
@@ -413,32 +415,67 @@ def password_change_done_view(request):
 # CULTURE SUBMISSION
 # =========================
 
+
+
+
+
 @login_required
-def submit_culture(request):
-    if request.method == 'POST':
-        form = SubmissionForm(request.POST)
+def about_view(request):
+    return render(request, 'culture/about.html')
+
+
+@login_required
+def submit_state(request):
+
+    if request.method == "POST":
+        form = StateSubmissionForm(request.POST)
 
         if form.is_valid():
             submission = form.save(commit=False)
-            submission.status = 'pending'
+            submission.area_type = "state"
+            submission.submitted_by = request.user
             submission.save()
 
-            messages.success(
-                request,
-                "Your submission has been sent for admin approval."
-            )
-
-            return redirect('submit_success')
+            return redirect("submit_success")
 
     else:
-        form = SubmissionForm()
+        form = StateSubmissionForm()
 
     return render(
         request,
-        'culture/submit_culture.html',
-        {'form': form}
+        "culture/submit_state.html",
+        {"form": form}
     )
 
+@login_required
+def submit_district(request):
+
+    if request.method == "POST":
+        form = DistrictSubmissionForm(request.POST)
+
+        if form.is_valid():
+            submission = form.save(commit=False)
+            submission.area_type = "district"
+            submission.submitted_by = request.user
+            submission.save()
+
+            return redirect("submit_success")
+
+    else:
+        form = DistrictSubmissionForm()
+
+    return render(
+        request,
+        "culture/submit_district.html",
+        {"form": form}
+    )
+
+
+def contribute(request):
+    return render(
+        request,
+        "culture/contribute.html"
+    )
 
 @login_required
 def submit_success(request):
@@ -446,7 +483,3 @@ def submit_success(request):
         request,
         'culture/submit_success.html'
     )
-
-@login_required
-def about_view(request):
-    return render(request, 'culture/about.html')

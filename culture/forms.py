@@ -179,3 +179,111 @@ class SubmissionForm(forms.ModelForm):
             )
 
         return cleaned_data
+    
+from .models import Submission
+
+from django import forms
+from .models import Submission
+
+
+class StateSubmissionForm(forms.ModelForm):
+
+    class Meta:
+        model = Submission
+        fields = [
+            'state_name',
+            'capital',
+
+            'famous_food',
+            'food_image',
+            'food_link',
+
+            'famous_dance',
+            'dance_image',
+            'dance_link',
+
+            'famous_folk_art',
+            'folk_art_image',
+            'folk_art_link',
+
+            'famous_temple',
+            'temple_image',
+            'temple_link',
+
+            'traditional_dress',
+            'dress_image',
+            'dress_link',
+
+            'monuments',
+            'monument_image',
+            'monument_link',
+
+            'uniqueness',
+            'uniqueness_link',
+
+            'image',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.required = True
+            field.widget.attrs.update({
+                'class': 'form-control',
+                'required': 'required'
+            })
+
+
+class DistrictSubmissionForm(forms.ModelForm):
+
+    class Meta:
+        model = Submission
+        fields = [
+            'state_name',
+            'district_name',
+
+            'famous_food',
+            'food_link',
+
+            'famous_festival',
+            'festival_link',
+
+            'famous_temple',
+            'temple_link',
+
+            'monuments',
+            'monument_link',
+
+            'uniqueness',
+            'uniqueness_link',
+
+            'image',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.required = True
+            field.widget.attrs.update({
+                'class': 'form-control',
+                'required': 'required'
+            })
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        if not cleaned_data.get('state_name'):
+            raise forms.ValidationError(
+                "State name is required."
+            )
+
+        if not cleaned_data.get('district_name'):
+            raise forms.ValidationError(
+                "District name is required."
+            )
+
+        return cleaned_data
+
+        

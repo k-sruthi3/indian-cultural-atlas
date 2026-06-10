@@ -92,25 +92,27 @@ def approve_submissions(modeladmin, request, queryset):
             )
 
             District.objects.get_or_create(
-                name=sub.district_name,
-                state=state,
-                defaults={
-                    "famous_food": sub.famous_food,
-                    "famous_festival": sub.famous_festival,
-                    "festival_link": sub.festival_link,
+    name=sub.district_name,
+    state=state,
+    defaults={
+        "famous_food": sub.famous_food,
+        "food_link": sub.food_link,
 
-                    "famous_temple": sub.famous_temple,
-                    "temple_link": sub.temple_link,
+        "famous_festival": sub.famous_festival,
+        "festival_link": sub.festival_link,
 
-                    "famous_monument": sub.monuments,
-                    "monument_link": sub.monument_link,
+        "famous_temple": sub.famous_temple,
+        "temple_link": sub.temple_link,
 
-                    "uniqueness": sub.uniqueness,
-                    "uniqueness_link": sub.uniqueness_link,
+        "famous_monument": sub.monuments,
+        "monument_link": sub.monument_link,
 
-                    "image": sub.image,
-                }
-            )
+        "uniqueness": sub.uniqueness,
+        "uniqueness_link": sub.uniqueness_link,
+
+        "image": sub.image,
+    }
+)
 
         sub.status = "approved"
         sub.save()

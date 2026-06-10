@@ -1,15 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Success</title>
-</head>
-<body>
+<!-- culture/templates/culture/submit_success.html -->
+{% extends 'base.html' %}
 
-<h2>
-    Your submission has been sent for admin approval.
-</h2>
+{% block title %}Submission Successful{% endblock %}
 
-<a href="/">Go Home</a>
+{% block content %}
 
-</body>
-</html>
+<div class="container py-5">
+
+```
+<div class="card shadow-lg border-0 text-center p-5">
+
+    <div class="mb-4">
+        <h1 class="text-success">Submission Successful</h1>
+    </div>
+
+    <p class="lead">
+        Thank you for contributing to the Indian Cultural Atlas.
+    </p>
+
+    <p class="text-muted">
+        Your submission has been received and is currently awaiting
+        administrator review. Once approved, it will be added to the website.
+    </p>
+
+    <div class="mt-4">
+        <a href="{% url 'home' %}" class="btn btn-primary btn-lg">
+            Return to Home
+        </a>
+
+        <a href="{% url 'contribute' %}" class="btn btn-success btn-lg ms-2">
+            Submit Another Contribution
+        </a>
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

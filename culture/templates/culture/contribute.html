@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Contribute Culture{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">
+            Contribute Cultural Information
+        </h1>
+
+        <p class="lead text-muted">
+            Help preserve India's rich cultural heritage by contributing
+            authentic information about states and districts.
+        </p>
+    </div>
+
+    <div class="row justify-content-center g-4">
+
+        <!-- State Card -->
+        <div class="col-md-5">
+            <div class="card shadow-lg h-100 border-0">
+                <div class="card-body text-center p-5">
+
+                    <h2 class="mb-3">🏛️ State Culture</h2>
+
+                    <p class="text-muted">
+                        Add information about a state including food,
+                        dance, folk art, temples, monuments,
+                        traditional dress and cultural uniqueness.
+                    </p>
+
+                    <a href="{% url 'submit_state' %}"
+                       class="btn btn-primary btn-lg mt-3">
+                        Submit State Culture
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- District Card -->
+        <div class="col-md-5">
+            <div class="card shadow-lg h-100 border-0">
+                <div class="card-body text-center p-5">
+
+                    <h2 class="mb-3">🏘️ District Culture</h2>
+
+                    <p class="text-muted">
+                        Add information about a district including
+                        famous food, festivals, temples,
+                        monuments and unique cultural identity.
+                    </p>
+
+                    <a href="{% url 'submit_district' %}"
+                       class="btn btn-success btn-lg mt-3">
+                        Submit District Culture
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-5">
+        <div class="card shadow border-0">
+            <div class="card-body p-4">
+
+                <h4 class="text-center mb-3">
+                     Submission Guidelines
+                </h4>
+
+                <ul class="mb-0">
+                    <li>Provide accurate cultural information.</li>
+                    <li>All fields are required.</li>
+                    <li>Use valid image and reference links.</li>
+                    <li>Submissions are reviewed by administrators.</li>
+                    <li>Approved submissions will appear on the website.</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
