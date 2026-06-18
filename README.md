@@ -170,8 +170,9 @@ Add screenshots of:
 ![Registration_page](Screenshots/Registration_page.png)
 ## login_page
 ![login_page](Screenshots/login_page.png)
-![Home_page](Screenshots/Home_page.png)
 ## Home_page
+![Home_page](Screenshots/Home_page.png)
+## State_Details
 ![State_Details](Screenshots/State_Details.png)
 ## District_details
 ![District_details](Screenshots/District_details.png)
