@@ -166,7 +166,7 @@ http://127.0.0.1:8000/
 ## Screenshots
 
 Add screenshots of:
-
+<!-- Registration_page -->
 ![Registration_page](Screenshots/Registration_page.png)
 ![login_page](Screenshots/login_page.png)
 ![Home_page](Screenshots/Home_page.png)
@@ -176,20 +176,13 @@ Add screenshots of:
 ![Integrated map](Screenshots/Integratedmap.png)
 ![Contribution_page](Screenshots/Contribution_page.png)
 ![State_contribution](Screenshots/State_contribution.png)
+![District_contribution](Screenshots/District_contribution.png)
 ![Profile_page](Screenshots/Profile_page.png)
 ![Contact_page](Screenshots/Contact_page.png)
 ![Settings_page](Screenshots/Settings_page.png)
 ![Admin_approval](Screenshots/Admin_approval.png)
-![District_contribution](Screenshots/District_contribution.png)
 
-* Home Page
-* State Details Page
-* District Details Page
-* Search Feature
-* User Profile
-* State Submission Form
-* District Submission Form
-* Admin Approval Panel
+
 
 ---
 
