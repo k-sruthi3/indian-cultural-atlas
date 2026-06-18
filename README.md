@@ -166,21 +166,34 @@ http://127.0.0.1:8000/
 ## Screenshots
 
 Add screenshots of:
-<!-- Registration_page -->
+## Registration_page
 ![Registration_page](Screenshots/Registration_page.png)
+## login_page
 ![login_page](Screenshots/login_page.png)
 ![Home_page](Screenshots/Home_page.png)
+## Home_page
 ![State_Details](Screenshots/State_Details.png)
+## District_details
 ![District_details](Screenshots/District_details.png)
+## Indepth_details
 ![Indepth_details](Screenshots/Indepth_details.png)
+## Integrated map
 ![Integrated map](Screenshots/Integratedmap.png)
+## Contribution_page
 ![Contribution_page](Screenshots/Contribution_page.png)
+## State_contribution
 ![State_contribution](Screenshots/State_contribution.png)
+## District_contribution
 ![District_contribution](Screenshots/District_contribution.png)
+## Profile_page
 ![Profile_page](Screenshots/Profile_page.png)
+## Contact_page
 ![Contact_page](Screenshots/Contact_page.png)
+## Settings_page
 ![Settings_page](Screenshots/Settings_page.png)
+## Admin_approval
 ![Admin_approval](Screenshots/Admin_approval.png)
+
 
 
 
