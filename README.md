@@ -166,8 +166,8 @@ http://127.0.0.1:8000/
 ## Screenshots
 
 Add screenshots of:
-![About page](About_page.png)
-![Admin_approval](Admin_approval.png)
+![About page](Screenshots/About_page.png)
+![Admin_approval](Screenshots/Admin_approval.png)
 
 ![About page](About_page.png)
 
