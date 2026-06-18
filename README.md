@@ -113,7 +113,7 @@ Indian-Cultural-Atlas/
 ### Clone the Repository
 
 ```bash
-git clone <https://github.com/k-sruthi3/indian-cultural-atlas.git>
+git clone https://github.com/k-sruthi3/indian-cultural-atlas.git
 cd Indian-Cultural-Atlas
 ```
 
@@ -165,34 +165,33 @@ http://127.0.0.1:8000/
 
 ## Screenshots
 
-Add screenshots of:
-## Registration_page
+## Registration page
 ![Registration_page](Screenshots/Registration_page.png)
-## login_page
+## login page
 ![login_page](Screenshots/login_page.png)
-## Home_page
+## Home page
 ![Home_page](Screenshots/Home_page.png)
-## State_Details
+## State Details
 ![State_Details](Screenshots/State_Details.png)
-## District_details
+## District details
 ![District_details](Screenshots/District_details.png)
-## Indepth_details
+## Indepth details
 ![Indepth_details](Screenshots/Indepth_details.png)
 ## Integrated map
 ![Integrated map](Screenshots/Integratedmap.png)
-## Contribution_page
+## Contribution page
 ![Contribution_page](Screenshots/Contribution_page.png)
-## State_contribution
+## State contribution
 ![State_contribution](Screenshots/State_contribution.png)
-## District_contribution
+## District contribution
 ![District_contribution](Screenshots/District_contribution.png)
-## Profile_page
+## Profile page
 ![Profile_page](Screenshots/Profile_page.png)
-## Contact_page
+## Contact page
 ![Contact_page](Screenshots/Contact_page.png)
-## Settings_page
+## Settings page
 ![Settings_page](Screenshots/Settings_page.png)
-## Admin_approval
+## Admin approval
 ![Admin_approval](Screenshots/Admin_approval.png)
 
 
